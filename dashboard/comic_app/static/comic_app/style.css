@@ -1,0 +1,21 @@
+img {
+  width:50%;
+  height:50%;
+}
+.column {
+  float: left;
+  width: 27.33%;
+  padding: 15px;
+}
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.title{
+  display: block;
+}
+span{
+  font-family: 'Roboto', sans-serif;
+}

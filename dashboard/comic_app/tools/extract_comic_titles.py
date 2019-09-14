@@ -1,21 +1,14 @@
 # first party
 import re
 import requests
-import os
 
 # third party
 from bs4 import BeautifulSoup
-from flask import Flask, render_template
 
 # tools
-from tools.extract_images import extract_images
+from comic_app.tools.extract_images import extract_images
 
-
-def foo():
-    try:
-        os.mkdir("images")
-    except:
-        pass
+def extract_image_comics():
     site = 'https://imagecomics.com/comics/new-releases'
     response = requests.get(site)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -38,22 +31,7 @@ def foo():
                     comics_and_images.append((result.group(1)))
                 except:
                     pass
+    comic_titles = comics_and_images[1:len(comics_and_images):2]
+    comic_images = comics_and_images[0:len(comics_and_images):2]
 
-    name = extract_images(comics_and_images[0])
-    print("images/"+name)
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], name)
-    return render_template('index.html', user_image = "/home/jiksa/Documents/projects/comic_app/images/"+name)
-
-
-
-
-
-
-# print(soup.prettify())
-# comic_tags = soup.find_all('a')
-# for tag in comic_tags: # go through each tag and try to parse it by it's href
-#     try:
-#         print(tag['href'])
-#     except:
-#         pass
-# print(comics)
+    return comic_titles, comic_images
