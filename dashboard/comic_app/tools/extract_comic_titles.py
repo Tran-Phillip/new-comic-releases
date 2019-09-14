@@ -9,6 +9,12 @@ from bs4 import BeautifulSoup
 from comic_app.tools.extract_images import extract_images
 
 def extract_image_comics():
+    '''
+    This function uses beautiful soup to extract all the images and comic titles
+    from the image comic new releases website.
+    :return comic_titles: the list of comic titles
+    :return comic_images: the list of comic images assosiated with that title
+    '''
     site = 'https://imagecomics.com/comics/new-releases'
     response = requests.get(site)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -34,4 +40,46 @@ def extract_image_comics():
     comic_titles = comics_and_images[1:len(comics_and_images):2]
     comic_images = comics_and_images[0:len(comics_and_images):2]
 
+    return comic_titles, comic_images
+
+def extract_marvel_comics():
+    '''
+    This function uses beautiful soup to extract all the images and comic titles
+    from the marvel comics new releases website.
+    :return comic_titles: the list of comic titles
+    :return comic_images: the list of comic images assosiated with that title
+    '''
+    site = 'https://www.marvel.com/comics/calendar'
+    response = requests.get(site)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    comic_tags = soup.find_all(['img'])
+
+    comic_titles = []
+    comic_images = []
+    for tag in comic_tags:
+        tag_check = tag['alt']
+        if(len(tag_check) > 0): # sometimes there are empty strings
+            comic_titles.append(tag['alt'])
+            comic_images.append(tag['src'])
+    return comic_titles, comic_images
+
+def extract_dc_comics():
+    '''
+    This function uses beautiful soup to extract all the images and comic titles
+    from the dc comics new releases website.
+    :return comic_titles: the list of comic titles
+    :return comic_images: the list of comic images assosiated with that title
+    '''
+    site = 'https://www.marvel.com/comics/calendar'
+    response = requests.get(site)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    comic_tags = soup.find_all(['img'])
+
+    comic_titles = []
+    comic_images = []
+    for tag in comic_tags:
+        tag_check = tag['alt']
+        if(len(tag_check) > 0): # sometimes there are empty strings
+            comic_titles.append(tag['alt'])
+            comic_images.append(tag['src'])
     return comic_titles, comic_images

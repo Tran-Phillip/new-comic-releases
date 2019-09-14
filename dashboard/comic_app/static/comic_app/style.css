@@ -1,6 +1,10 @@
+*{
+  outline: 1px;
+}
+
 img {
-  width:50%;
-  height:50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .column {
   float: left;
