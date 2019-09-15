@@ -70,16 +70,13 @@ def extract_dc_comics():
     :return comic_titles: the list of comic titles
     :return comic_images: the list of comic images assosiated with that title
     '''
-    site = 'https://www.marvel.com/comics/calendar'
+    site = 'https://www.dccomics.com/comics?all=1#browse'
     response = requests.get(site)
     soup = BeautifulSoup(response.text, 'html.parser')
-    comic_tags = soup.find_all(['img'])
+    comic_tags = soup.find_all(['img','p'])
+    # print(soup.prettify())
 
-    comic_titles = []
-    comic_images = []
     for tag in comic_tags:
-        tag_check = tag['alt']
-        if(len(tag_check) > 0): # sometimes there are empty strings
-            comic_titles.append(tag['alt'])
-            comic_images.append(tag['src'])
-    return comic_titles, comic_images
+        print("~~~~")
+        print(tag)
+        print("~~~~")
