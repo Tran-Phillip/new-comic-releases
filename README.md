@@ -6,3 +6,7 @@ Simply cd into the folder and type
 python3 dashboard 
 ```
 and follow the link to run!
+TODO: 
+Add DC comics
+Add boom comics 
+Figure out why the html is a little janky
